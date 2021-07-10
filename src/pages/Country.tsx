@@ -1,8 +1,16 @@
 import React from "react";
+import {Sidebar} from "../components";
 
 function Country() {
   return (
-    <div></div>
+    <div>
+      <Sidebar
+        searchByCountries
+        chooseCasesType={handleChooseCasesType}
+        chooseDateFrom={handleChooseDateFrom}
+        chooseDateTo={handleChooseDateTo}
+      />
+    </div>
   )
 }
 
