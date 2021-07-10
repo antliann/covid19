@@ -19,13 +19,16 @@ function Global() {
     setDateTo(date);
   }
 
+  const handleSearch = () => handleGlobalSearch(casesType, dateFrom, dateTo);
+
   return (
     <div>
       <Sidebar
-        searchByCountries={false}
         chooseCasesType={handleChooseCasesType}
         chooseDateFrom={handleChooseDateFrom}
         chooseDateTo={handleChooseDateTo}
+        chosenCases={casesType}
+        onSearchButtonClick={handleSearch}
       />
     </div>
   )

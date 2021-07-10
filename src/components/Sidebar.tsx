@@ -2,16 +2,20 @@ import React from "react";
 
 function Sidebar({
                    searchByCountries,
+                   chooseCountry,
                    chooseCasesType,
                    chooseDateFrom,
-                   chooseDateTo,
+                   chooseDateTo = () => null,
                    chosenCases,
+                   onSearchButtonClick,
                  }: {
-  searchByCountries: boolean,
+  searchByCountries?: boolean,
+  chooseCountry?: (country: string) => void,
   chooseCasesType: (cases: string) => () => void,
   chooseDateFrom: (date: string) => void,
-  chooseDateTo: (date: string) => void,
+  chooseDateTo?: (date: string) => void,
   chosenCases: string,
+  onSearchButtonClick: () => void,
 }) {
   const handleChangeDateFrom = (e: React.ChangeEvent<HTMLInputElement>) => {
     chooseDateFrom(e.target.value);
@@ -31,21 +35,25 @@ function Sidebar({
       <div id="cases">
         <button
           className={chosenCases === 'confirmed' ? 'selected' : 'unselected'}
-          onClick={chooseCasesType('confirmed')}>Confirmed
+          onClick={chooseCasesType('confirmed')}>
+          Confirmed
         </button>
         <button
           className={chosenCases === 'deaths' ? 'selected' : 'unselected'}
-          onClick={chooseCasesType('deaths')}>Deaths
+          onClick={chooseCasesType('deaths')}>
+          Deaths
         </button>
         <button
           className={chosenCases === 'recovered' ? 'selected' : 'unselected'}
-          onClick={chooseCasesType('recovered')}>Recovered
+          onClick={chooseCasesType('recovered')}>
+          Recovered
         </button>
       </div>
       <div id="period">
         <input type="date" min="2019-12-01" onChange={handleChangeDateFrom}/>
-        <input type="date" onChange={handleChangeDateTo}/>
+        {searchByCountries || <input type="date" onChange={handleChangeDateTo}/>}
       </div>
+      <button onClick={onSearchButtonClick}>Search</button>
     </div>
   )
 }
