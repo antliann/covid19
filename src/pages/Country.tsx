@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Sidebar} from "../components";
-import {handleSearchByCountry} from '../requests/handleSearchByCountry'
+import handleSearchByCountry from '../requests/handleSearchByCountry'
 
 function Country() {
   const [country, setCountry] = useState('ukraine');

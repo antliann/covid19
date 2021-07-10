@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Sidebar} from "../components";
-import {handleGlobalSearch} from '../requests/handleGlobalSearch';
+import handleGlobalSearch from '../requests/handleGlobalSearch';
 
 function Global() {
   const [casesType, setCasesType] = useState('confirmed');

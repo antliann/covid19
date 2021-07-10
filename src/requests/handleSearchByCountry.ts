@@ -1,6 +1,9 @@
 function handleSearchByCountry(country: string, casesType: string, dateFrom: string): Promise<string> {
-  return fetch("https://api.covid19api.com/live/country/south-africa/status/confirmed/date/2021-03-21T13:13:30Z")
+  const dateForSearch = dateFrom || '2019-12-01';
+  const query = `https://api.covid19api.com/live/country/south-africa/status/${casesType}/date/${dateForSearch}`;
+
+  return fetch(query)
     .then(res => res.json());
 }
 
-export {handleSearchByCountry};
+export default handleSearchByCountry;

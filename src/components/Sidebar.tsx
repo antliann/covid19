@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useMemo} from "react";
 
 function Sidebar({
                    searchByCountries,
@@ -17,6 +17,8 @@ function Sidebar({
   chosenCases: string,
   onSearchButtonClick: () => void,
 }) {
+  const currentDate = useMemo(() => new Date().toISOString().split("T")[0], []);
+
   const handleChangeDateFrom = (e: React.ChangeEvent<HTMLInputElement>) => {
     chooseDateFrom(e.target.value);
   }
@@ -50,8 +52,8 @@ function Sidebar({
         </button>
       </div>
       <div id="period">
-        <input type="date" min="2019-12-01" onChange={handleChangeDateFrom}/>
-        {searchByCountries || <input type="date" onChange={handleChangeDateTo}/>}
+        <input type="date" min="2019-12-01" max={currentDate} onChange={handleChangeDateFrom}/>
+        {searchByCountries || <input type="date" min="2019-12-01" max={currentDate} onChange={handleChangeDateTo}/>}
       </div>
       <button onClick={onSearchButtonClick}>Search</button>
     </div>
