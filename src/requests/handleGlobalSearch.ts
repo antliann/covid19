@@ -15,8 +15,8 @@ function extractDataFromResponse(casesType: string, responseData: any[]) {
   const casesTypeKey = transformTypeValueToKey(casesType);
   return responseData.map((item) => {
     return {
-      quantity: item[casesTypeKey],
       date: item.Date?.split('T')[0],
+      quantity: item[casesTypeKey],
     }
   })
 }
