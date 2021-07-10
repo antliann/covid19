@@ -1,11 +1,12 @@
 import React, {useState} from "react";
-
 import {Sidebar} from "../components";
+import {handleGlobalSearch} from '../requests/handleGlobalSearch';
 
 function Global() {
   const [casesType, setCasesType] = useState('confirmed');
   const [dateFrom, setDateFrom] = useState('');
   const [dateTo, setDateTo] = useState('');
+  const [data, setData] = useState('');
 
   const handleChooseCasesType = (cases: string) => () => {
     setCasesType(cases);
@@ -19,9 +20,13 @@ function Global() {
     setDateTo(date);
   }
 
-  const handleSearch = () => handleGlobalSearch(casesType, dateFrom, dateTo);
+  const handleSearch = async () => {
+    const results = await handleGlobalSearch(casesType, dateFrom, dateTo);
+    setData(results);
+  }
 
   return (
+    <div>
     <div>
       <Sidebar
         chooseCasesType={handleChooseCasesType}
@@ -30,6 +35,8 @@ function Global() {
         chosenCases={casesType}
         onSearchButtonClick={handleSearch}
       />
+    </div>
+      <div>{data.toString()}</div>
     </div>
   )
 }

@@ -14,14 +14,14 @@ function App() {
     <Router>
       <NavigationBar />
       <Switch>
-        <Route path="/">
-          <Global/>
-        </Route>
         <Route path="/country">
           <Country/>
         </Route>
         <Route path="/about">
           <About/>
+        </Route>
+        <Route path="/">
+          <Global/>
         </Route>
       </Switch>
     </Router>
