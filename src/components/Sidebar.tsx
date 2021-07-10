@@ -1,4 +1,5 @@
 import React, {useMemo} from "react";
+import {MIN_DATE, CONFIRMED, DEATHS, RECOVERED} from "../constants";
 
 function Sidebar({
                    searchByCountries,
@@ -17,7 +18,7 @@ function Sidebar({
   chosenCases: string,
   onSearchButtonClick: () => void,
 }) {
-  const currentDate = useMemo(() => new Date().toISOString().split("T")[0], []);
+  const currentDate = useMemo(() => new Date().toISOString().split('T')[0], []);
 
   const handleChangeDateFrom = (e: React.ChangeEvent<HTMLInputElement>) => {
     chooseDateFrom(e.target.value);
@@ -36,24 +37,24 @@ function Sidebar({
       )}
       <div id="cases">
         <button
-          className={chosenCases === 'confirmed' ? 'selected' : 'unselected'}
-          onClick={chooseCasesType('confirmed')}>
+          className={chosenCases === CONFIRMED ? 'selected' : 'unselected'}
+          onClick={chooseCasesType(CONFIRMED)}>
           Confirmed
         </button>
         <button
-          className={chosenCases === 'deaths' ? 'selected' : 'unselected'}
-          onClick={chooseCasesType('deaths')}>
+          className={chosenCases === DEATHS ? 'selected' : 'unselected'}
+          onClick={chooseCasesType(DEATHS)}>
           Deaths
         </button>
         <button
-          className={chosenCases === 'recovered' ? 'selected' : 'unselected'}
-          onClick={chooseCasesType('recovered')}>
+          className={chosenCases === RECOVERED ? 'selected' : 'unselected'}
+          onClick={chooseCasesType(RECOVERED)}>
           Recovered
         </button>
       </div>
       <div id="period">
-        <input type="date" min="2019-12-01" max={currentDate} onChange={handleChangeDateFrom}/>
-        {searchByCountries || <input type="date" min="2019-12-01" max={currentDate} onChange={handleChangeDateTo}/>}
+        <input type="date" min={MIN_DATE} max={currentDate} onChange={handleChangeDateFrom}/>
+        {searchByCountries || <input type="date" min={MIN_DATE} max={currentDate} onChange={handleChangeDateTo}/>}
       </div>
       <button onClick={onSearchButtonClick}>Search</button>
     </div>

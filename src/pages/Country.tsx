@@ -1,10 +1,11 @@
 import React, {useState} from "react";
 import {Sidebar} from "../components";
 import handleSearchByCountry from '../requests/handleSearchByCountry'
+import {CONFIRMED} from "../constants";
 
 function Country() {
   const [country, setCountry] = useState('ukraine');
-  const [casesType, setCasesType] = useState('confirmed');
+  const [casesType, setCasesType] = useState(CONFIRMED);
   const [dateFrom, setDateFrom] = useState('');
   const [data, setData] = useState('');
 

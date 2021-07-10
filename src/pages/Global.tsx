@@ -1,9 +1,10 @@
 import React, {useState} from "react";
 import {Sidebar} from "../components";
 import handleGlobalSearch from '../requests/handleGlobalSearch';
+import {CONFIRMED} from "../constants";
 
 function Global() {
-  const [casesType, setCasesType] = useState('confirmed');
+  const [casesType, setCasesType] = useState(CONFIRMED);
   const [dateFrom, setDateFrom] = useState('');
   const [dateTo, setDateTo] = useState('');
   const [data, setData] = useState('');

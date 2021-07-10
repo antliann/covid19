@@ -1,6 +1,10 @@
-function handleGlobalSearch(casesType: string, dateFrom: string, dateTo: string): Promise<string> {
+import {API_URL} from '../constants';
 
-  return fetch("https://api.covid19api.com/world?from=2020-03-01T00:00:00Z&to=2021-06-01T00:00:00Z")
+function handleGlobalSearch(casesType: string, dateFrom: string, dateTo: string): Promise<string> {
+  const dateFromWithSearchKey = dateFrom && `from=${dateFrom}`;
+  const dateToWithSearchKey = dateTo && `${dateFrom && '&'}to=${dateTo}`;
+
+  return fetch(`${API_URL}/world?${dateFromWithSearchKey}${dateToWithSearchKey}`)
     .then(res => res.json())
 }
 
