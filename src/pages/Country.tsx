@@ -23,7 +23,7 @@ function Country() {
 
   const handleSearch = async () => {
     const results = await handleSearchByCountry(country, casesType, dateFrom);
-    setData(results);
+    setData(results.map((item, index) => index + ') ' + item.quantity + item.date).join("\n"));
   }
 
   return (
@@ -38,7 +38,7 @@ function Country() {
           onSearchButtonClick={handleSearch}
         />
       </div>
-      <div>{data.toString()}</div>
+      <div>{data}</div>
     </div>
   )
 }

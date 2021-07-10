@@ -23,7 +23,7 @@ function Global() {
 
   const handleSearch = async () => {
     const results = await handleGlobalSearch(casesType, dateFrom, dateTo);
-    setData(results);
+    setData(results.map((item) => item.quantity + item.date).join());
   }
 
   return (
@@ -37,7 +37,7 @@ function Global() {
         onSearchButtonClick={handleSearch}
       />
     </div>
-      <div>{data.toString()}</div>
+      <div>{data}</div>
     </div>
   )
 }
