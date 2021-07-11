@@ -4,7 +4,7 @@ import handleSearchByCountry from '../requests/handleSearchByCountry'
 import {CONFIRMED, ERROR, LOADING, NO_DATA_FOUND} from "../constants";
 
 function Country() {
-  const [country, setCountry] = useState('ukraine');
+  const [country, setCountry] = useState('usa');
   const [casesType, setCasesType] = useState(CONFIRMED);
   const [dateFrom, setDateFrom] = useState('');
   const [data, setData] = useState<any[]>([]);

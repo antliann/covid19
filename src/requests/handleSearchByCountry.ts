@@ -2,13 +2,12 @@ import {MIN_DATE, API_URL} from '../constants';
 
 function handleSearchByCountry(country: string, casesType: string, dateFrom: string) {
   const dateForSearch = dateFrom || MIN_DATE; // api does not allow searching without date value
-  const countryKey = 'ukraine';
 
-  const query = `${API_URL}/live/country/${countryKey}/status/${casesType.toLowerCase()}/date/${dateForSearch}`;
+  const query = `${API_URL}/live/country/${country}/status/${casesType.toLowerCase()}/date/${dateForSearch}`;
 
   return fetch(query)
     .then(res => res.json())
-    .then(responseData => extractDataFromResponse(casesType, responseData), error => null);
+    .then(responseData => extractDataFromResponse(casesType, responseData), () => null);
 }
 
 function extractDataFromResponse(casesType: string, responseData: any[]) {
