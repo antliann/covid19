@@ -12,13 +12,15 @@ function handleGlobalSearch(casesType: string, dateFrom: string, dateTo: string)
 }
 
 function extractDataFromResponse(casesType: string, responseData: any[]) {
-  const casesTypeKey = transformTypeValueToKey(casesType);
-  return responseData.map((item) => {
-    return {
-      date: item.Date?.split('T')[0],
-      quantity: item[casesTypeKey],
-    }
-  })
+  if (responseData) {
+    const casesTypeKey = transformTypeValueToKey(casesType);
+    return responseData.map((item) => {
+      return {
+        date: item.Date?.split('T')[0],
+        quantity: item[casesTypeKey],
+      }
+    })
+  } else return null;
 }
 
 const transformTypeValueToKey = (text: string) => 'Total' + text;

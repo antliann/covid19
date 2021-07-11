@@ -9,6 +9,8 @@ function Sidebar({
                    chooseDateTo = () => null,
                    chosenCases,
                    onSearchButtonClick,
+                   chosenDateFrom,
+                   chosenDateTo,
                  }: {
   searchByCountries?: boolean,
   chooseCountry?: (country: string) => void,
@@ -17,6 +19,8 @@ function Sidebar({
   chooseDateTo?: (date: string) => void,
   chosenCases: string,
   onSearchButtonClick: () => void,
+  chosenDateFrom?: string,
+  chosenDateTo?: string,
 }) {
   const currentDate = useMemo(() => new Date().toISOString().split('T')[0], []);
 
@@ -53,8 +57,8 @@ function Sidebar({
         </button>
       </div>
       <div id="period">
-        <input type="date" min={MIN_DATE} max={currentDate} onChange={handleChangeDateFrom}/>
-        {searchByCountries || <input type="date" min={MIN_DATE} max={currentDate} onChange={handleChangeDateTo}/>}
+        <input type="date" min={MIN_DATE} max={chosenDateTo || currentDate} onChange={handleChangeDateFrom}/>
+        {searchByCountries || <input type="date" min={chosenDateFrom || MIN_DATE} max={currentDate} onChange={handleChangeDateTo}/>}
       </div>
       <button onClick={onSearchButtonClick}>Search</button>
     </div>

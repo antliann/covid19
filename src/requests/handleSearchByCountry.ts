@@ -12,25 +12,27 @@ function handleSearchByCountry(country: string, casesType: string, dateFrom: str
 }
 
 function extractDataFromResponse(casesType: string, responseData: any[]) {
-  // calculating total country data as a sum of its regions data
-  const quantitiesByDate: { [key: string]: number } = {};
+  if (responseData) {
+    // calculating total country data as a sum of its regions data
+    const quantitiesByDate: { [key: string]: number } = {};
 
-  responseData.forEach((item) => {
-    const dateOfRecord = item.Date?.split('T')[0];
+    responseData.forEach((item) => {
+      const dateOfRecord = item.Date?.split('T')[0];
 
-    if (quantitiesByDate.hasOwnProperty(dateOfRecord)) {
-      quantitiesByDate[dateOfRecord] += item[casesType];
-    } else {
-      quantitiesByDate[dateOfRecord] = item[casesType];
-    }
-  });
+      if (quantitiesByDate.hasOwnProperty(dateOfRecord)) {
+        quantitiesByDate[dateOfRecord] += item[casesType];
+      } else {
+        quantitiesByDate[dateOfRecord] = item[casesType];
+      }
+    });
 
-  return Object.keys(quantitiesByDate).map((date) => {
-    return {
-      date,
-      quantity: quantitiesByDate[date],
-    }
-  })
+    return Object.keys(quantitiesByDate).map((date) => {
+      return {
+        date,
+        quantity: quantitiesByDate[date],
+      }
+    })
+  } else return null;
 }
 
 export default handleSearchByCountry;

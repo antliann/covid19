@@ -9,6 +9,8 @@ function Global() {
   const [dateTo, setDateTo] = useState('');
   const [data, setData] = useState('');
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleChooseCasesType = (cases: string) => () => {
     setCasesType(cases);
   }
@@ -22,22 +24,31 @@ function Global() {
   }
 
   const handleSearch = async () => {
-    const results = await handleGlobalSearch(casesType, dateFrom, dateTo);
-    setData(results.map((item) => item.quantity + item.date).join());
+    if (dateFrom < dateTo) {
+      setIsLoading(true);
+      const results = await handleGlobalSearch(casesType, dateFrom, dateTo);
+      setData(results?.map((item) =>
+        item.quantity + ' ' + item.date).join() || 'No data for this period');
+      setIsLoading(false);
+    } else {
+      alert('Please, set "Date From" lower than "Date To"');
+    }
   }
 
   return (
     <div>
-    <div>
-      <Sidebar
-        chooseCasesType={handleChooseCasesType}
-        chooseDateFrom={handleChooseDateFrom}
-        chooseDateTo={handleChooseDateTo}
-        chosenCases={casesType}
-        onSearchButtonClick={handleSearch}
-      />
-    </div>
-      <div>{data}</div>
+      <div>
+        <Sidebar
+          chooseCasesType={handleChooseCasesType}
+          chooseDateFrom={handleChooseDateFrom}
+          chooseDateTo={handleChooseDateTo}
+          chosenCases={casesType}
+          onSearchButtonClick={handleSearch}
+          chosenDateFrom={dateFrom}
+          chosenDateTo={dateTo}
+        />
+      </div>
+      <div>{isLoading ? 'Loading...' : data}</div>
     </div>
   )
 }

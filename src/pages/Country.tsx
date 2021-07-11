@@ -9,6 +9,8 @@ function Country() {
   const [dateFrom, setDateFrom] = useState('');
   const [data, setData] = useState('');
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleChooseCountry = (country: string) => () => {
     setCountry(country);
   }
@@ -22,8 +24,11 @@ function Country() {
   }
 
   const handleSearch = async () => {
+    setIsLoading(true);
     const results = await handleSearchByCountry(country, casesType, dateFrom);
-    setData(results.map((item, index) => index + ') ' + item.quantity + item.date).join("\n"));
+    setData(results?.map((item, index) =>
+      index + ') ' + item.quantity + ' ' + item.date).join() || 'No data for this period');
+    setIsLoading(false);
   }
 
   return (
@@ -38,7 +43,7 @@ function Country() {
           onSearchButtonClick={handleSearch}
         />
       </div>
-      <div>{data}</div>
+      <div>{isLoading ? 'Loading...' : data}</div>
     </div>
   )
 }
