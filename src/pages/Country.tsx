@@ -1,7 +1,7 @@
-import React, {useState} from "react";
-import {Sidebar, StatisticsChart} from "../components";
+import React, {useState} from 'react';
+import {Sidebar, StatisticsChart} from '../components';
 import handleSearchByCountry from '../requests/handleSearchByCountry'
-import {CONFIRMED, ERROR, LOADING, NO_DATA_FOUND} from "../constants";
+import {CONFIRMED, ERROR, LOADING, NO_DATA_FOUND} from '../constants';
 
 function Country() {
   const [country, setCountry] = useState('usa');

@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 import './App.css';
 
-import {Global, Country, About} from "./pages";
+import {Global, Country, About} from './pages';
 import {NavigationBar} from "./components";
 
 function App() {

@@ -1,7 +1,9 @@
 import {MIN_DATE, API_URL} from '../constants';
+import {sortByDate} from '../methods';
 
 function handleSearchByCountry(country: string, casesType: string, dateFrom: string) {
-  const dateForSearch = dateFrom || MIN_DATE; // api does not allow searching without date value
+  // API does not allow searching without date value
+  const dateForSearch = dateFrom || MIN_DATE;
 
   const query = `${API_URL}/live/country/${country}/status/${casesType.toLowerCase()}/date/${dateForSearch}`;
 
@@ -30,11 +32,7 @@ function extractDataFromResponse(casesType: string, responseData: any[]) {
         date: date,
         quantity: quantitiesByDate[date],
       }
-    }).sort((a, b) => {
-      if (a.date < b.date) return -1;
-      else if (a.date > b.date) return 1;
-      else return 0;
-    })
+    }).sort(sortByDate)
   } else return [];
 }
 

@@ -1,10 +1,12 @@
-import {API_URL} from '../constants';
+import {API_URL, MIN_DATE} from '../constants';
+import {getCurrentDate, sortByDate} from '../methods';
 
 function handleGlobalSearch(casesType: string, dateFrom: string, dateTo: string) {
-  const dateFromWithSearchKey = dateFrom && `from=${dateFrom}`;
-  const dateToWithSearchKey = dateTo && `${dateFrom && '&'}to=${dateTo}`;
+  // API does not allow searching with only one date value
+  const dateSearchKey = (dateFrom || dateTo) &&
+    `from=${dateFrom || MIN_DATE}&to=${dateTo || getCurrentDate()}`;
 
-  const query = `${API_URL}/world?${dateFromWithSearchKey}${dateToWithSearchKey}`
+  const query = `${API_URL}/world?${dateSearchKey}`
 
   return fetch(query)
     .then(res => res.json())
@@ -19,11 +21,7 @@ function extractDataFromResponse(casesType: string, responseData: any[]) {
         date: item.Date?.split('T')[0],
         quantity: item[casesTypeKey],
       }
-    }).sort((a, b) => {
-      if (a.date < b.date) return -1;
-      else if (a.date > b.date) return 1;
-      else return 0;
-    })
+    }).sort(sortByDate);
   } else return [];
 }
 
