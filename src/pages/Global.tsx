@@ -50,7 +50,7 @@ function Global() {
   }
 
   return (
-    <div className="flex-row">
+    <div className="flex-adapt">
       <Sidebar
         chooseCasesType={handleChooseCasesType}
         chooseDateFrom={handleChooseDateFrom}
@@ -66,7 +66,9 @@ function Global() {
           <Container>
             <Typography className="center-text">{message}</Typography>
           </Container> :
-          <StatisticsChart.ChartArea data={data}/>
+          <div className="max-fit">
+            <StatisticsChart.ChartArea data={data}/>
+          </div>
       }
     </div>
   )

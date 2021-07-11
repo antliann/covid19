@@ -40,7 +40,7 @@ function Country() {
   }
 
   return (
-    <div className="flex-row">
+    <div className="flex-adapt">
       <Sidebar
         searchByCountries
         chooseCountry={handleChooseCountry}

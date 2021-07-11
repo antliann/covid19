@@ -1,32 +1,3 @@
-@media only screen and (min-width: 600px) {
-  .flex-row {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    height: 100%;
-  }
-
-  .sidebar {
-    display: flex;
-    flex-direction: column;
-    min-width: 300px;
-    min-height: calc(100vh - 150px);
-    background: white;
-    padding: 25px 20px;
-    border-radius: 10px;
-    margin-left: 20px;
-    border: 1px solid #ddd;
-  }
-}
-
-@media only screen and (max-width: 600px) {
-  .sidebar {
-    display: flex;
-    flex-direction: column;
-    width: 20%;
-  }
-}
-
 .sidebar-item-container {
   margin-bottom: 30px;
   display: flex;
@@ -37,3 +8,80 @@
   text-align: center;
 }
 
+.recharts-cartesian-axis-tick, .recharts-tooltip-wrapper {
+  font-family: Roboto, sans-serif;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.link {
+  text-decoration: none;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  padding: 25px 20px;
+  border-radius: 10px;
+  margin: 20px 0 20px 0;
+  border: 1px solid #ddd;
+}
+
+@media only screen and (min-width: 600px) {
+  .sidebar {
+    min-width: 300px;
+    min-height: calc(100vh - 150px);
+    margin: 20px;
+  }
+
+  .max-fit {
+    height: calc(100vh - 150px);
+    width: calc(80vw - 270px);
+  }
+
+  .flex-adapt {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .title {
+    padding-right: 40px;
+    font-weight: bold;
+  }
+
+  .nav-links {
+    margin-top: 2px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .sidebar {
+    width: 85%;
+  }
+
+  .max-fit {
+    margin-top: 50px;
+    height: calc(100vh - 150px);
+    width: calc(100vw - 50px);
+  }
+
+  .flex-adapt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .title {
+    padding: 20px;
+    font-weight: bold;
+  }
+}
