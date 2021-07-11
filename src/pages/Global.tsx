@@ -53,7 +53,7 @@ function Global() {
           chosenDateTo={dateTo}
         />
       </div>
-      <div>{message || <StatisticsChart.ChartBars data={data}/>}</div>
+      <div>{message || <StatisticsChart.ChartArea data={data}/>}</div>
     </div>
   )
 }
