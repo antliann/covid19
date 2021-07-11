@@ -13,6 +13,7 @@ function Sidebar({
                    chooseDateTo = () => null,
                    chooseNewCasesOnly = () => null,
                    chosenCases,
+                   chosenNewCasesOnly,
                    onSearchButtonClick,
                    chosenDateFrom,
                    chosenDateTo,
@@ -24,6 +25,7 @@ function Sidebar({
   chooseDateTo?: (date: string) => void,
   chooseNewCasesOnly?: (areNew: boolean) => void,
   chosenCases: string,
+  chosenNewCasesOnly?: boolean,
   onSearchButtonClick: () => void,
   chosenDateFrom?: string,
   chosenDateTo?: string,
@@ -79,7 +81,7 @@ function Sidebar({
       {searchByCountries || (
         <div className="sidebar-item-container">
           <div className="flex-row">
-            <Checkbox color="primary" onChange={handleNewCasesClick}/>
+            <Checkbox checked={chosenNewCasesOnly} color="primary" onChange={handleNewCasesClick}/>
             <Typography>New cases per day</Typography>
           </div>
         </div>
