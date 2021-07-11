@@ -1,10 +1,11 @@
 import React from 'react';
 import {MIN_DATE, CONFIRMED, DEATHS, RECOVERED} from '../constants';
 import {getCurrentDate} from '../methods';
+import {SelectCountryList} from '../components';
 
 function Sidebar({
                    searchByCountries,
-                   chooseCountry,
+                   chooseCountry = () => null,
                    chooseCasesType,
                    chooseDateFrom,
                    chooseDateTo = () => null,
@@ -23,7 +24,6 @@ function Sidebar({
   chosenDateFrom?: string,
   chosenDateTo?: string,
 }) {
-
   const handleChangeDateFrom = (e: React.ChangeEvent<HTMLInputElement>) => {
     chooseDateFrom(e.target.value);
   }
@@ -35,9 +35,7 @@ function Sidebar({
   return (
     <div>
       {searchByCountries && (
-        <select id="countries-list">
-
-        </select>
+        <SelectCountryList chooseCountry={chooseCountry} />
       )}
       <div id="cases">
         <button
@@ -58,7 +56,8 @@ function Sidebar({
       </div>
       <div id="period">
         <input type="date" min={MIN_DATE} max={chosenDateTo || getCurrentDate()} onChange={handleChangeDateFrom}/>
-        {searchByCountries || <input type="date" min={chosenDateFrom || MIN_DATE} max={getCurrentDate()} onChange={handleChangeDateTo}/>}
+        {searchByCountries ||
+        <input type="date" min={chosenDateFrom || MIN_DATE} max={getCurrentDate()} onChange={handleChangeDateTo}/>}
       </div>
       <button onClick={onSearchButtonClick}>Search</button>
     </div>

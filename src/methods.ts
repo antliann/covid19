@@ -8,4 +8,10 @@ function sortByDate(a: {date: string}, b: {date: string}) {
     else return 0;
 }
 
-export {getCurrentDate, sortByDate};
+function sortByCountryName(a: {Country: string}, b: {Country: string}) {
+  if (a.Country < b.Country) return -1;
+  else if (a.Country > b.Country) return 1;
+  else return 0;
+}
+
+export {getCurrentDate, sortByDate, sortByCountryName};
