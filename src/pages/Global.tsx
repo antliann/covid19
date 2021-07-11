@@ -8,6 +8,7 @@ function Global() {
   const [dateFrom, setDateFrom] = useState('');
   const [dateTo, setDateTo] = useState('');
   const [data, setData] = useState<any[]>([]);
+  const [newCasesOnly, setNewCasesOnly] = useState(false);
 
   const [message, setMessage] = useState('');
 
@@ -23,12 +24,14 @@ function Global() {
     setDateTo(date);
   }
 
+  const handleChooseNewCasesOnly = (areNew: boolean) => setNewCasesOnly(areNew);
+
   const handleSearch = async () => {
     if (dateFrom && dateTo && dateFrom >= dateTo) {
       alert('Please, set "Date From" lower than "Date To"');
     } else {
       setMessage(LOADING);
-      const results = await handleGlobalSearch(casesType, dateFrom, dateTo);
+      const results = await handleGlobalSearch(casesType, dateFrom, dateTo, newCasesOnly);
       if (results) {
         if (results.length) {
           setData(results);
@@ -47,6 +50,7 @@ function Global() {
           chooseCasesType={handleChooseCasesType}
           chooseDateFrom={handleChooseDateFrom}
           chooseDateTo={handleChooseDateTo}
+          chooseNewCasesOnly={handleChooseNewCasesOnly}
           chosenCases={casesType}
           onSearchButtonClick={handleSearch}
           chosenDateFrom={dateFrom}

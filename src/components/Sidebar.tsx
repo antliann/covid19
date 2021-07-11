@@ -1,5 +1,5 @@
 import React from 'react';
-import {MIN_DATE, CONFIRMED, DEATHS, RECOVERED} from '../constants';
+import {MIN_DATE, CONFIRMED, DEATHS, RECOVERED, ACTIVE} from '../constants';
 import {getCurrentDate} from '../methods';
 import {SelectCountryList} from '../components';
 
@@ -9,6 +9,7 @@ function Sidebar({
                    chooseCasesType,
                    chooseDateFrom,
                    chooseDateTo = () => null,
+                   chooseNewCasesOnly = () => null,
                    chosenCases,
                    onSearchButtonClick,
                    chosenDateFrom,
@@ -19,6 +20,7 @@ function Sidebar({
   chooseCasesType: (cases: string) => () => void,
   chooseDateFrom: (date: string) => void,
   chooseDateTo?: (date: string) => void,
+  chooseNewCasesOnly?: (areNew: boolean) => void,
   chosenCases: string,
   onSearchButtonClick: () => void,
   chosenDateFrom?: string,
@@ -32,10 +34,14 @@ function Sidebar({
     chooseDateTo(e.target.value);
   }
 
+  const handleNewCasesClick = (e: React.ChangeEvent<HTMLInputElement>) => {
+    chooseNewCasesOnly(e.target.checked);
+  }
+
   return (
     <div>
       {searchByCountries && (
-        <SelectCountryList chooseCountry={chooseCountry} />
+        <SelectCountryList chooseCountry={chooseCountry}/>
       )}
       <div id="cases">
         <button
@@ -53,6 +59,18 @@ function Sidebar({
           onClick={chooseCasesType(RECOVERED)}>
           Recovered
         </button>
+        {searchByCountries ? (
+          <button
+            className={chosenCases === ACTIVE ? 'selected' : 'unselected'}
+            onClick={chooseCasesType(ACTIVE)}>
+            Active
+          </button>
+        ) : (
+          <div>
+            <input type="checkbox" id="new-cases" onChange={handleNewCasesClick} />
+            <label htmlFor="new-cases">New cases per day</label>
+          </div>
+        )}
       </div>
       <div id="period">
         <input type="date" min={MIN_DATE} max={chosenDateTo || getCurrentDate()} onChange={handleChangeDateFrom}/>
