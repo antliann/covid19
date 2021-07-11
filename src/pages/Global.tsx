@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Sidebar} from "../components";
+import {Sidebar, StatisticsChart} from "../components";
 import handleGlobalSearch from '../requests/handleGlobalSearch';
 import {CONFIRMED} from "../constants";
 
@@ -7,7 +7,7 @@ function Global() {
   const [casesType, setCasesType] = useState(CONFIRMED);
   const [dateFrom, setDateFrom] = useState('');
   const [dateTo, setDateTo] = useState('');
-  const [data, setData] = useState('');
+  const [data, setData] = useState<any[]>([]);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -24,14 +24,13 @@ function Global() {
   }
 
   const handleSearch = async () => {
-    if (dateFrom < dateTo) {
+    if (dateFrom && dateTo && dateFrom >= dateTo) {
+      alert('Please, set "Date From" lower than "Date To"');
+    } else {
       setIsLoading(true);
       const results = await handleGlobalSearch(casesType, dateFrom, dateTo);
-      setData(results?.map((item) =>
-        item.quantity + ' ' + item.date).join() || 'No data for this period');
+      setData(results);
       setIsLoading(false);
-    } else {
-      alert('Please, set "Date From" lower than "Date To"');
     }
   }
 
@@ -48,7 +47,7 @@ function Global() {
           chosenDateTo={dateTo}
         />
       </div>
-      <div>{isLoading ? 'Loading...' : data}</div>
+      <div>{isLoading ? 'Loading...' : <StatisticsChart.ChartArea data={data}/>}</div>
     </div>
   )
 }

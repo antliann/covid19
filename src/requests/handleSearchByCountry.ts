@@ -28,11 +28,15 @@ function extractDataFromResponse(casesType: string, responseData: any[]) {
 
     return Object.keys(quantitiesByDate).map((date) => {
       return {
-        date,
+        date: date,
         quantity: quantitiesByDate[date],
       }
+    }).sort((a, b) => {
+      if (a.date < b.date) return -1;
+      else if (a.date > b.date) return 1;
+      else return 0;
     })
-  } else return null;
+  } else return [];
 }
 
 export default handleSearchByCountry;

@@ -19,10 +19,14 @@ function extractDataFromResponse(casesType: string, responseData: any[]) {
         date: item.Date?.split('T')[0],
         quantity: item[casesTypeKey],
       }
+    }).sort((a, b) => {
+      if (a.date < b.date) return -1;
+      else if (a.date > b.date) return 1;
+      else return 0;
     })
-  } else return null;
+  } else return [];
 }
 
-const transformTypeValueToKey = (text: string) => 'Total' + text;
+const transformTypeValueToKey = (text: string) => 'New' + text;
 
 export default handleGlobalSearch;
