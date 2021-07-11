@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import {Sidebar, StatisticsChart} from '../components';
 import handleGlobalSearch from '../requests/handleGlobalSearch';
-import {CONFIRMED, ERROR, LOADING, MIN_DATE, NO_DATA_FOUND} from '../constants';
+import {CONFIRMED, ERROR, LOADING, MIN_DATE, NO_DATA_FOUND, CHOOSE_SEARCH_PARAMETERS} from '../constants';
 import {getCurrentDate} from "../methods";
+import {Typography, Container} from "@material-ui/core";
 
 function Global() {
   const [casesType, setCasesType] = useState(CONFIRMED);
@@ -11,7 +12,7 @@ function Global() {
   const [data, setData] = useState<any[]>([]);
   const [newCasesOnly, setNewCasesOnly] = useState(false);
 
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState(CHOOSE_SEARCH_PARAMETERS);
 
   const handleChooseCasesType = (cases: string) => () => {
     setCasesType(cases);
@@ -49,20 +50,24 @@ function Global() {
   }
 
   return (
-    <div>
-      <div>
-        <Sidebar
-          chooseCasesType={handleChooseCasesType}
-          chooseDateFrom={handleChooseDateFrom}
-          chooseDateTo={handleChooseDateTo}
-          chooseNewCasesOnly={handleChooseNewCasesOnly}
-          chosenCases={casesType}
-          onSearchButtonClick={handleSearch}
-          chosenDateFrom={dateFrom}
-          chosenDateTo={dateTo}
-        />
-      </div>
-      <div>{message || <StatisticsChart.ChartArea data={data}/>}</div>
+    <div className="flex-row">
+      <Sidebar
+        chooseCasesType={handleChooseCasesType}
+        chooseDateFrom={handleChooseDateFrom}
+        chooseDateTo={handleChooseDateTo}
+        chooseNewCasesOnly={handleChooseNewCasesOnly}
+        chosenCases={casesType}
+        onSearchButtonClick={handleSearch}
+        chosenDateFrom={dateFrom}
+        chosenDateTo={dateTo}
+      />
+      {
+        message ?
+          <Container>
+            <Typography className="center-text">{message}</Typography>
+          </Container> :
+          <StatisticsChart.ChartArea data={data}/>
+      }
     </div>
   )
 }

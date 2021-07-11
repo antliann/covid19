@@ -8,18 +8,17 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  ResponsiveContainer
 } from 'recharts';
 
 function ChartArea({data}: { data: { date: string, quantity: string }[] }) {
   return (
     <AreaChart
-      width={500}
-      height={400}
       data={data}
       margin={{
         left: 30,
       }}
+      width={500}
+      height={300}
     >
       <CartesianGrid strokeDasharray="3 3"/>
       <XAxis dataKey="date"/>
@@ -40,11 +39,11 @@ function ChartBars({data}: { data: { date: string, quantity: string }[] }) {
         left: 30,
       }}
     >
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="date" />
-      <YAxis />
-      <Tooltip />
-      <Bar dataKey="quantity" fill="#8884d8" />
+      <CartesianGrid strokeDasharray="3 3"/>
+      <XAxis dataKey="date"/>
+      <YAxis/>
+      <Tooltip/>
+      <Bar dataKey="quantity" fill="#8884d8"/>
     </BarChart>
   );
 }

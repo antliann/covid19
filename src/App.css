@@ -1,0 +1,39 @@
+@media only screen and (min-width: 600px) {
+  .flex-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 100%;
+  }
+
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+    min-height: calc(100vh - 150px);
+    background: white;
+    padding: 25px 20px;
+    border-radius: 10px;
+    margin-left: 20px;
+    border: 1px solid #ddd;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+  }
+}
+
+.sidebar-item-container {
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.center-text {
+  text-align: center;
+}
+

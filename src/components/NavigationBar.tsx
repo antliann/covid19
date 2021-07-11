@@ -1,22 +1,21 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {Typography, Toolbar, Menu, MenuItem, IconButton, Button} from "@material-ui/core";
 
 function NavigationBar() {
   return (
-    <div>
-      <h1>Covid19 Statistics</h1>
-      <nav>
-        <li>
+    <Toolbar>
+      <Typography variant="h6">Covid19 Statistics</Typography>
+        <MenuItem>
           <Link to="/">Global statistics</Link>
-        </li>
-        <li>
+        </MenuItem>
+        <MenuItem>
           <Link to="/country">Statistics per country</Link>
-        </li>
-        <li>
+        </MenuItem>
+        <MenuItem>
           <Link to="/about">About</Link>
-        </li>
-      </nav>
-    </div>
+        </MenuItem>
+    </Toolbar>
   )
 }
 

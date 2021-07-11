@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import {Sidebar, StatisticsChart} from '../components';
 import handleSearchByCountry from '../requests/handleSearchByCountry'
-import {CONFIRMED, ERROR, LOADING, NO_DATA_FOUND} from '../constants';
+import {CONFIRMED, ERROR, LOADING, NO_DATA_FOUND, CHOOSE_SEARCH_PARAMETERS} from '../constants';
+import {Container, Typography} from "@material-ui/core";
 
 function Country() {
   const [country, setCountry] = useState('');
@@ -9,7 +10,7 @@ function Country() {
   const [dateFrom, setDateFrom] = useState('');
   const [data, setData] = useState<any[]>([]);
 
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState(CHOOSE_SEARCH_PARAMETERS);
 
   const handleChooseCountry = (countryKey: string) => {
     setCountry(countryKey);
@@ -39,18 +40,22 @@ function Country() {
   }
 
   return (
-    <div>
-      <div>
-        <Sidebar
-          searchByCountries
-          chooseCountry={handleChooseCountry}
-          chooseCasesType={handleChooseCasesType}
-          chooseDateFrom={handleChooseDateFrom}
-          chosenCases={casesType}
-          onSearchButtonClick={handleSearch}
-        />
-      </div>
-      <div>{message || <StatisticsChart.ChartBars data={data}/>}</div>
+    <div className="flex-row">
+      <Sidebar
+        searchByCountries
+        chooseCountry={handleChooseCountry}
+        chooseCasesType={handleChooseCasesType}
+        chooseDateFrom={handleChooseDateFrom}
+        chosenCases={casesType}
+        onSearchButtonClick={handleSearch}
+      />
+      {
+        message ?
+          <Container>
+            <Typography className="center-text">{message}</Typography>
+          </Container> :
+          <StatisticsChart.ChartBars data={data}/>
+      }
     </div>
   )
 }

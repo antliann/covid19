@@ -3,6 +3,8 @@ import {MIN_DATE, CONFIRMED, DEATHS, RECOVERED, ACTIVE} from '../constants';
 import {getCurrentDate} from '../methods';
 import {SelectCountryList} from '../components';
 
+import {Checkbox, ButtonGroup, Button, TextField, Typography} from "@material-ui/core";
+
 function Sidebar({
                    searchByCountries,
                    chooseCountry = () => null,
@@ -39,57 +41,79 @@ function Sidebar({
   }
 
   return (
-    <div>
+    <div className="sidebar">
       {searchByCountries && (
-        <SelectCountryList chooseCountry={chooseCountry}/>
+        <div className="sidebar-item-container">
+          <SelectCountryList chooseCountry={chooseCountry}/>
+        </div>
       )}
-      <div id="cases">
-        <button
-          className={chosenCases === CONFIRMED ? 'selected' : 'unselected'}
-          onClick={chooseCasesType(CONFIRMED)}>
-          Confirmed
-        </button>
-        <button
-          className={chosenCases === DEATHS ? 'selected' : 'unselected'}
-          onClick={chooseCasesType(DEATHS)}>
-          Deaths
-        </button>
-        <button
-          className={chosenCases === RECOVERED ? 'selected' : 'unselected'}
-          onClick={chooseCasesType(RECOVERED)}>
-          Recovered
-        </button>
-        {searchByCountries ? (
-          <button
-            className={chosenCases === ACTIVE ? 'selected' : 'unselected'}
-            onClick={chooseCasesType(ACTIVE)}>
-            Active
-          </button>
-        ) : (
-          <div>
-            <input type="checkbox" id="new-cases" onChange={handleNewCasesClick}/>
-            <label htmlFor="new-cases">New cases per day</label>
+      <div className="sidebar-item-container">
+        <ButtonGroup
+          orientation="vertical"
+          color="primary"
+          aria-label="outlined primary button group">
+          <Button
+            variant={chosenCases === CONFIRMED ? 'contained' : 'outlined'}
+            onClick={chooseCasesType(CONFIRMED)}>
+            Confirmed
+          </Button>
+          <Button
+            variant={chosenCases === DEATHS ? 'contained' : 'outlined'}
+            onClick={chooseCasesType(DEATHS)}>
+            Deaths
+          </Button>
+          <Button
+            variant={chosenCases === RECOVERED ? 'contained' : 'outlined'}
+            onClick={chooseCasesType(RECOVERED)}>
+            Recovered
+          </Button>
+          {searchByCountries && (
+            <Button
+              variant={chosenCases === ACTIVE ? 'contained' : 'outlined'}
+              onClick={chooseCasesType(ACTIVE)}>
+              Active
+            </Button>
+          )}
+        </ButtonGroup>
+      </div>
+      {searchByCountries || (
+        <div className="sidebar-item-container">
+          <div className="flex-row">
+            <Checkbox color="primary" onChange={handleNewCasesClick}/>
+            <Typography>New cases per day</Typography>
           </div>
-        )}
-      </div>
+        </div>
+      )}
       <div id="period">
-        <input
-          type="date"
-          value={chosenDateFrom}
-          min={MIN_DATE}
-          max={chosenDateTo || getCurrentDate()}
-          onChange={handleChangeDateFrom}
-        />
+        <div className="sidebar-item-container">
+          <TextField
+            type="date"
+            label="Choose Date From"
+            value={chosenDateFrom || ''}
+            inputProps={{
+              min: MIN_DATE,
+              max: chosenDateTo || getCurrentDate(),
+            }}
+            InputLabelProps={{shrink: true}}
+            onChange={handleChangeDateFrom}
+          />
+        </div>
         {searchByCountries ||
-        <input
-          type="date"
-          value={chosenDateTo}
-          min={chosenDateFrom || MIN_DATE}
-          max={getCurrentDate()}
-          onChange={handleChangeDateTo}
-        />}
+        <div className="sidebar-item-container">
+          <TextField
+            type="date"
+            label="Choose Date To"
+            value={chosenDateTo}
+            inputProps={{
+              min: chosenDateFrom || MIN_DATE,
+              max: getCurrentDate(),
+            }}
+            InputLabelProps={{shrink: true}}
+            onChange={handleChangeDateTo}
+          />
+        </div>}
       </div>
-      <button onClick={onSearchButtonClick}>Search</button>
+      <Button variant="contained" color="primary" onClick={onSearchButtonClick}>Search</Button>
     </div>
   )
 }
