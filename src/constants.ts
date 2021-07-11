@@ -6,4 +6,8 @@ const CONFIRMED = 'Confirmed';
 const DEATHS = 'Deaths';
 const RECOVERED = 'Recovered';
 
-export {MIN_DATE, API_URL, CONFIRMED, DEATHS, RECOVERED};
+const LOADING = 'Loading...';
+const NO_DATA_FOUND = 'No data found for your search parameters';
+const ERROR = 'An error occurred while processing your request';
+
+export {MIN_DATE, API_URL, CONFIRMED, DEATHS, RECOVERED, LOADING, NO_DATA_FOUND, ERROR};

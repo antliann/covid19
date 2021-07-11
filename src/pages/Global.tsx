@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {Sidebar, StatisticsChart} from "../components";
 import handleGlobalSearch from '../requests/handleGlobalSearch';
-import {CONFIRMED} from "../constants";
+import {CONFIRMED, ERROR, LOADING, NO_DATA_FOUND} from "../constants";
 
 function Global() {
   const [casesType, setCasesType] = useState(CONFIRMED);
@@ -9,7 +9,7 @@ function Global() {
   const [dateTo, setDateTo] = useState('');
   const [data, setData] = useState<any[]>([]);
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState('');
 
   const handleChooseCasesType = (cases: string) => () => {
     setCasesType(cases);
@@ -27,10 +27,16 @@ function Global() {
     if (dateFrom && dateTo && dateFrom >= dateTo) {
       alert('Please, set "Date From" lower than "Date To"');
     } else {
-      setIsLoading(true);
+      setMessage(LOADING);
       const results = await handleGlobalSearch(casesType, dateFrom, dateTo);
-      setData(results);
-      setIsLoading(false);
+      if (results) {
+        if (results.length) {
+          setData(results);
+          setMessage('');
+        } else {
+          setMessage(NO_DATA_FOUND);
+        }
+      } else setMessage(ERROR);
     }
   }
 
@@ -47,7 +53,7 @@ function Global() {
           chosenDateTo={dateTo}
         />
       </div>
-      <div>{isLoading ? 'Loading...' : <StatisticsChart.ChartArea data={data}/>}</div>
+      <div>{message || <StatisticsChart.ChartBars data={data}/>}</div>
     </div>
   )
 }

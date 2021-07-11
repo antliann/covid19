@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {Sidebar, StatisticsChart} from "../components";
 import handleSearchByCountry from '../requests/handleSearchByCountry'
-import {CONFIRMED} from "../constants";
+import {CONFIRMED, ERROR, LOADING, NO_DATA_FOUND} from "../constants";
 
 function Country() {
   const [country, setCountry] = useState('ukraine');
@@ -9,7 +9,7 @@ function Country() {
   const [dateFrom, setDateFrom] = useState('');
   const [data, setData] = useState<any[]>([]);
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState('');
 
   const handleChooseCountry = (country: string) => () => {
     setCountry(country);
@@ -24,10 +24,16 @@ function Country() {
   }
 
   const handleSearch = async () => {
-    setIsLoading(true);
+    setMessage(LOADING);
     const results = await handleSearchByCountry(country, casesType, dateFrom);
-    setData(results);
-    setIsLoading(false);
+    if (results) {
+      if (results.length) {
+        setData(results);
+        setMessage('');
+      } else {
+        setMessage(NO_DATA_FOUND);
+      }
+    } else setMessage(ERROR);
   }
 
   return (
@@ -42,7 +48,7 @@ function Country() {
           onSearchButtonClick={handleSearch}
         />
       </div>
-      <div>{isLoading ? 'Loading...' : <StatisticsChart.ChartBars data={data}/>}</div>
+      <div>{message || <StatisticsChart.ChartBars data={data}/>}</div>
     </div>
   )
 }

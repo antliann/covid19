@@ -8,7 +8,7 @@ function handleGlobalSearch(casesType: string, dateFrom: string, dateTo: string)
 
   return fetch(query)
     .then(res => res.json())
-    .then(responseData => extractDataFromResponse(casesType, responseData));
+    .then(responseData => extractDataFromResponse(casesType, responseData), error => null);
 }
 
 function extractDataFromResponse(casesType: string, responseData: any[]) {

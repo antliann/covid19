@@ -8,7 +8,6 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   ResponsiveContainer
 } from 'recharts';
 
@@ -45,7 +44,6 @@ function ChartBars({data}: { data: { date: string, quantity: string }[] }) {
       <XAxis dataKey="date" />
       <YAxis />
       <Tooltip />
-      <Legend />
       <Bar dataKey="quantity" fill="#8884d8" />
     </BarChart>
   );
