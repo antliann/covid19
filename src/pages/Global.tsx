@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import {Sidebar, StatisticsChart} from '../components';
 import handleGlobalSearch from '../requests/handleGlobalSearch';
-import {CONFIRMED, ERROR, LOADING, NO_DATA_FOUND} from '../constants';
+import {CONFIRMED, ERROR, LOADING, MIN_DATE, NO_DATA_FOUND} from '../constants';
+import {getCurrentDate} from "../methods";
 
 function Global() {
   const [casesType, setCasesType] = useState(CONFIRMED);
@@ -18,10 +19,14 @@ function Global() {
 
   const handleChooseDateFrom = (date: string) => {
     setDateFrom(date);
+    // since API does not allow searching with only one date value:
+    !dateTo && setDateTo(getCurrentDate());
   }
 
   const handleChooseDateTo = (date: string) => {
     setDateTo(date);
+    // since API does not allow searching with only one date value:
+    !dateFrom && setDateFrom(MIN_DATE);
   }
 
   const handleChooseNewCasesOnly = (areNew: boolean) => setNewCasesOnly(areNew);

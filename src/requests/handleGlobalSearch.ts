@@ -1,10 +1,9 @@
-import {API_URL, MIN_DATE} from '../constants';
-import {getCurrentDate, sortByDate} from '../methods';
+import {API_URL} from '../constants';
+import {sortByDate} from '../methods';
 
 function handleGlobalSearch(casesType: string, dateFrom: string, dateTo: string, newCasesOnly: boolean) {
   // API does not allow searching with only one date value
-  const dateSearchKey = (dateFrom || dateTo) &&
-    `from=${dateFrom || MIN_DATE}&to=${dateTo || getCurrentDate()}`;
+  const dateSearchKey = (dateFrom || dateTo) && `from=${dateFrom}&to=${dateTo}`;
 
   const query = `${API_URL}/world?${dateSearchKey}`
 

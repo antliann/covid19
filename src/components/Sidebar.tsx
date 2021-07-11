@@ -67,15 +67,27 @@ function Sidebar({
           </button>
         ) : (
           <div>
-            <input type="checkbox" id="new-cases" onChange={handleNewCasesClick} />
+            <input type="checkbox" id="new-cases" onChange={handleNewCasesClick}/>
             <label htmlFor="new-cases">New cases per day</label>
           </div>
         )}
       </div>
       <div id="period">
-        <input type="date" min={MIN_DATE} max={chosenDateTo || getCurrentDate()} onChange={handleChangeDateFrom}/>
+        <input
+          type="date"
+          value={chosenDateFrom}
+          min={MIN_DATE}
+          max={chosenDateTo || getCurrentDate()}
+          onChange={handleChangeDateFrom}
+        />
         {searchByCountries ||
-        <input type="date" min={chosenDateFrom || MIN_DATE} max={getCurrentDate()} onChange={handleChangeDateTo}/>}
+        <input
+          type="date"
+          value={chosenDateTo}
+          min={chosenDateFrom || MIN_DATE}
+          max={getCurrentDate()}
+          onChange={handleChangeDateTo}
+        />}
       </div>
       <button onClick={onSearchButtonClick}>Search</button>
     </div>
