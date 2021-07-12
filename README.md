@@ -1,11 +1,9 @@
-#How to run the app:
+# How to run the app:
 
-Just open this link: https://antliann.github.io/covid19/
-with an already deployed app!
-\
-\
-\
-If you want to run the project on your PC:
+### Just open this link: https://antliann.github.io/covid19/ with an already deployed app!
+
+
+## If you want to run the project on your PC:
 
 If Node.js is not installed on your PC, download it from
 https://nodejs.org/en/download/
