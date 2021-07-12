@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Sidebar, StatisticsChart} from '../components';
 import handleSearchByCountry from '../requests/handleSearchByCountry'
 import {CONFIRMED, ERROR, LOADING, NO_DATA_FOUND, CHOOSE_SEARCH_PARAMETERS} from '../constants';
@@ -8,20 +8,35 @@ function Country() {
   const [country, setCountry] = useState('');
   const [casesType, setCasesType] = useState(CONFIRMED);
   const [dateFrom, setDateFrom] = useState('');
-  const [data, setData] = useState<any[]>([]);
 
+  const [data, setData] = useState<any[]>([]);
   const [message, setMessage] = useState(CHOOSE_SEARCH_PARAMETERS);
+
+  useEffect(() => {
+      const previousCountryFilter = sessionStorage.getItem('countryCountryFilter');
+      previousCountryFilter && setCountry(previousCountryFilter);
+
+      const previousCasesTypeFilter = sessionStorage.getItem('countryCasesTypeFilter');
+      previousCasesTypeFilter && setCasesType(previousCasesTypeFilter);
+
+      const previousDateFromFilter = sessionStorage.getItem('countryDateFromFilter');
+      previousDateFromFilter && setDateFrom(previousDateFromFilter);
+    }, []
+  );
 
   const handleChooseCountry = (countryKey: string) => {
     setCountry(countryKey);
+    sessionStorage.setItem('countryCountryFilter', countryKey);
   }
 
   const handleChooseCasesType = (cases: string) => () => {
     setCasesType(cases);
+    sessionStorage.setItem('countryCasesTypeFilter', cases);
   }
 
   const handleChooseDateFrom = (date: string) => {
     setDateFrom(date);
+    sessionStorage.setItem('countryDateFromFilter', date);
   }
 
   const handleSearch = async () => {
@@ -47,6 +62,7 @@ function Country() {
         chooseCasesType={handleChooseCasesType}
         chooseDateFrom={handleChooseDateFrom}
         chosenCases={casesType}
+        chosenDateFrom={dateFrom}
         onSearchButtonClick={handleSearch}
       />
       {

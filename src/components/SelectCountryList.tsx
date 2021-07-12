@@ -23,12 +23,12 @@ function SelectCountryList({chooseCountry}: { chooseCountry: (country: string) =
     }, []
   );
 
-  const handleCountrySelect = (e: React.ChangeEvent<{value: unknown; }>) => {
+  const handleCountrySelect = (e: React.ChangeEvent<{ value: unknown; }>) => {
     chooseCountry(e.target.value as string);
   }
 
   return (
-    <Select defaultValue="default" onChange={handleCountrySelect}>
+    <Select defaultValue={sessionStorage.getItem('countryCountryFilter') || 'default'} onChange={handleCountrySelect}>
       <MenuItem value="default" disabled>Choose country...</MenuItem>
       {countriesList.map((country: { Country: string, Slug: string }) => (
         <MenuItem value={country.Slug}>{country.Country}</MenuItem>
