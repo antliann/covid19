@@ -31,7 +31,7 @@ function SelectCountryList({chooseCountry}: { chooseCountry: (country: string) =
     <Select defaultValue={sessionStorage.getItem('countryCountryFilter') || 'default'} onChange={handleCountrySelect}>
       <MenuItem value="default" disabled>Choose country...</MenuItem>
       {countriesList.map((country: { Country: string, Slug: string }) => (
-        <MenuItem value={country.Slug}>{country.Country}</MenuItem>
+        <MenuItem key={country.Slug} value={country.Slug}>{country.Country}</MenuItem>
       ))}
     </Select>
   );
