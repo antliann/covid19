@@ -12,6 +12,10 @@
   font-family: Roboto, sans-serif;
 }
 
+.spacing-top {
+  margin-top: 120px;
+}
+
 .flex-row {
   display: flex;
   flex-direction: row;

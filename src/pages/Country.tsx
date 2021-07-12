@@ -70,7 +70,9 @@ function Country() {
           <Container>
             <Typography className="center-text">{message}</Typography>
           </Container> :
-          <StatisticsChart.ChartBars data={data}/>
+          <div className="max-fit">
+            <StatisticsChart.ChartBars data={data}/>
+          </div>
       }
     </div>
   )

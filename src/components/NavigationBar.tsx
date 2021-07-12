@@ -7,7 +7,7 @@ function NavigationBar() {
     <Toolbar>
       <div className="flex-adapt">
         <Typography className="title" variant="h6">Covid19 Statistics</Typography>
-        <div className="nav-links flex-row">
+        <div className="nav-links flex-adapt">
           <MenuItem>
             <Link className="link" to="/">Global statistics</Link>
           </MenuItem>
