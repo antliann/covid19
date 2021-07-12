@@ -1,8 +1,10 @@
-How to run the app:
+#How to run the app:
 
 Just open this link: https://antliann.github.io/covid19/
 with an already deployed app!
-
+\
+\
+\
 If you want to run the project on your PC:
 
 If Node.js is not installed on your PC, download it from
@@ -16,4 +18,4 @@ An app should automatically open in your browser.\
 If no, manually enter `localhost:3000` in your address bar.
 \
 \
-P.S. If `yarn` is not installed on your PC, run `npm install --global yarn`
+P.S. If `yarn` is not installed on your PC, run `npm install --global yarn`.
