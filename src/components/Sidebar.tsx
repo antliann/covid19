@@ -44,6 +44,11 @@ function Sidebar({
 
   return (
     <div className="sidebar">
+      <div className="sidebar-item-container">
+        <Typography variant="h6" className="center-text">
+          {searchByCountries ? 'Statistics Per Country' : 'Global Statistics'}
+        </Typography>
+      </div>
       {searchByCountries && (
         <div className="sidebar-item-container">
           <SelectCountryList chooseCountry={chooseCountry}/>
