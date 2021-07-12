@@ -14,13 +14,13 @@ function App() {
     <Router>
       <NavigationBar />
       <Switch>
-        <Route path="/country">
+        <Route path={process.env.PUBLIC_URL + '/country'}>
           <Country/>
         </Route>
-        <Route path="/about">
+        <Route path={process.env.PUBLIC_URL + '/about'}>
           <About/>
         </Route>
-        <Route path="/">
+        <Route path={process.env.PUBLIC_URL + '/'}>
           <Global/>
         </Route>
       </Switch>

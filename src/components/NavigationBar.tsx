@@ -9,13 +9,13 @@ function NavigationBar() {
         <Typography className="title" variant="h6">Covid19 Statistics</Typography>
         <div className="nav-links flex-adapt">
           <MenuItem>
-            <Link className="link" to="/">Global statistics</Link>
+            <Link className="link" to={process.env.PUBLIC_URL + '/'}>Global statistics</Link>
           </MenuItem>
           <MenuItem>
-            <Link className="link" to="/country">Statistics per country</Link>
+            <Link className="link" to={process.env.PUBLIC_URL + '/country'}>Statistics per country</Link>
           </MenuItem>
           <MenuItem>
-            <Link className="link" to="/about">About</Link>
+            <Link className="link" to={process.env.PUBLIC_URL + '/about'}>About</Link>
           </MenuItem>
         </div>
       </div>
